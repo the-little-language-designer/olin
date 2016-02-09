@@ -46,13 +46,15 @@
           (self `init))
         self))))
 
+(define up vector)
+
 (define BUFFER
   (CLASS
    (cons `require `(size init-value))
    (cons `init
          (lambda (self)
-           (self `#(vector ,(make-vector (self `size)
-                                         (self `init-value))))))
+           (self (up `vector (make-vector (self `size)
+                                          (self `init-value))))))
    (cons `vector `())
    (cons `cursor 0)
    (cons `set
@@ -77,8 +79,8 @@
    (cons `require `(size init-value))
    (cons `init
          (lambda (self)
-           (self `#(buffer-box
-                    ,(list (BUFFER
+           (self (up `buffer-box
+                     (list (BUFFER
                             (cons `size
                                   (self `size))
                             (cons `init-value
@@ -88,11 +90,11 @@
          (lambda (self value)
            (let ([buffer (car (self `buffer-box))])
              (buffer `set (buffer `cursor) value)
-             (buffer `#(cursor ,(+ 1 (buffer `cursor)))))))
+             (buffer (up `cursor (+ 1 (buffer `cursor)))))))
    (cons `pop
          (lambda (self)
            (let ([buffer (car (self `buffer-box))])
-             (buffer `#(cursor ,(- (buffer `cursor) 1)))
+             (buffer (up `cursor (- (buffer `cursor) 1)))
              (buffer `get (buffer `cursor)))))))
 
 (define argument-stack

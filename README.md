@@ -22,7 +22,11 @@ message is symbol
 
 ## class
 
-to create class by associate list of message and method
+```
+to create a class
+  by an associate list of messages and methods
+```
+
 ```scheme
 (define <class-name>
   (CLASS
@@ -31,7 +35,12 @@ to create class by associate list of message and method
     ...))
 ```
 
+---------------------
+
+```
 the shape of method is
+```
+
 ```scheme
 (lambda (this <message> <argument> ...)
   <body>)
@@ -41,7 +50,12 @@ the shape of method is
 
 ## object
 
-to create object
+```
+to create an object by an associate list of messages and methods
+this associate list of object
+  is appended to the associate list of the class
+```
+
 ```scheme
 (<class>
   (cons <message> <method>)
@@ -49,8 +63,17 @@ to create object
   ...)
 ```
 
+---------------------
+
 ```
-right after creation
+right before the creation
+  the massage `require is passed to the object
+  which should returns a list of messages
+  which must occur in the associate list of object
+```
+
+```
+right after the creation
   the massage `init is passed to the object
 ```
 
@@ -58,7 +81,10 @@ right after creation
 
 ## message
 
+```
 message passing is like
+```
+
 ```scheme
 (<object> <message> <argument> ...)
 ```
@@ -71,6 +97,16 @@ when passing a message to a object
     it is called
     [note that object is function
      I have to put an object into a box to *not* call it]
+```
+
+---------------------
+
+```
+to update a method with new value
+```
+
+```scheme
+(<object> (up <message> <new-value>))
 ```
 
 ---------------------
