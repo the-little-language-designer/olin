@@ -60,7 +60,7 @@ right after creation
 
 message passing is like
 ```scheme
-(<class> <message> <argument> ...)
+(<object> <message> <argument> ...)
 ```
 
 ```
